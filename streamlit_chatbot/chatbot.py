@@ -195,6 +195,22 @@ else:
 import pandas as pd  # type: ignore
 import base64
 
+# Look for your topic selection block, it probably looks like this:
+if topics == "Algebra": # type: ignore
+    st.info("📘 Formula: (a+b)² = a² + 2ab + b²")
+    
+    # --- PUT THE CODE HERE ---
+    user_answer = st.text_input("Solve: 2x + 8 = 20")
+
+    if st.button("Check Answer"):
+        if user_answer.strip() == "6":
+            st.success("🎯 Correct! Great job! 🎉")
+            st.balloons()
+        elif user_answer.strip() == "":
+            st.warning("⚠️ Please type an answer before checking.")
+        else:
+            st.error("❌ Wrong answer! Try again.")
+
 # =========================================================================
 # PAGE CONFIG
 # =========================================================================
