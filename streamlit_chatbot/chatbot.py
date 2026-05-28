@@ -1,5 +1,3 @@
-from winsound import PlaySound
-
 import streamlit as st  # type: ignore
 import pandas as pd  # type: ignore
 
@@ -58,7 +56,7 @@ with col2:
     st.info("🧪 Chemistry Lab Report (Due: Friday)")
     
 # In-App Notification Alert
-st.warning("⚠️ *NOTIFICATION:* You have 2 assignments due soon! Work on them now?")
+st.warning("⚠️ **NOTIFICATION:** You have 2 assignments due soon! Work on them now?")
 
 btn_col1, btn_col2 = st.columns(2)
 with btn_col1:
@@ -73,7 +71,7 @@ with btn_col2:
 # The Quiz punishment logic
 if st.session_state.quiz_active:
     st.error("🚨 Procrastination detected! You must solve this quiz to snooze your reminder!")
-    st.write("*Question: What is 12 x 12?*")
+    st.write("**Question: What is 12 x 12?**")
     
     user_answer = st.text_input("Type your answer here:", key="quiz_input")
     if st.button("Submit Quiz Answer"):
@@ -274,6 +272,23 @@ h1, h2, h3 {
 """, unsafe_allow_html=True)
 
 # =========================================================================
+# SOUND EFFECT FUNCTION
+# =========================================================================
+def autoplay_audio(file_path: str):
+    with open(file_path, "rb") as f:
+        data = f.read()
+
+    b64 = base64.b64encode(data).decode()
+
+    md = f"""
+    <audio autoplay="true">
+    <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+    </audio>
+    """
+
+    st.markdown(md, unsafe_allow_html=True)
+
+# =========================================================================
 # TITLE
 # =========================================================================
 st.markdown('<h1 class="glow">🎓 STUDYVERSE</h1>', unsafe_allow_html=True)
@@ -349,6 +364,15 @@ with btn2:
         st.error("🚨 Procrastination Detected!")
 
 # =========================================================================
+# SOUND EFFECTS
+# =========================================================================
+CORRECT_SOUND = "https://www.soundjay.com/buttons/sounds/button-3.mp3"
+WRONG_SOUND = "https://www.soundjay.com/buttons/sounds/button-10.mp3"
+
+def play_sound(sound_url):
+    st.audio(sound_url, format="audio/mp3", autoplay=True)
+
+# =========================================================================
 # REVISION HUB
 # =========================================================================
 st.markdown("---")
@@ -377,11 +401,11 @@ if subject == "Mathematics":
         if st.button("Check Answer"):
             if answer == "6":
                 st.success("✅ Correct!")
-                PlaySound(CORRECT_SOUND) # type: ignore
+                play_sound(CORRECT_SOUND)
                 st.balloons()
             else:
                 st.error("❌ Wrong answer!")
-                PlaySound(WRONG_SOUND) # type: ignore
+                play_sound(WRONG_SOUND)
 
 elif subject == "Science":
 
@@ -466,24 +490,19 @@ st.markdown("---")
 st.markdown(
     "<center>✨ Made with Streamlit | Study Hard, Dream Big ✨</center>",
     unsafe_allow_html=True
-)
-
+)# =========================================================================
+# SOUND EFFECTS
 # =========================================================================
-# SECTION 4: AUDIO TRIGGER LOGIC (At the absolute end)
-# =========================================================================
+def play_correct_sound():
+    st.markdown("""
+        <audio autoplay>
+        <source src="https://www.soundjay.com/buttons/sounds/button-3.mp3" type="audio/mp3">
+        </audio>
+    """, unsafe_allow_html=True)
 
-# 1. Play Alarm Loop if the procrastination quiz is currently open
-if st.session_state.quiz_active and not st.session_state.wrong_answer_trigger:
-    try:
-        alarm_file = open("streamlit_chatbot/alarm.mp3", "rb")
-        st.audio(alarm_file.read(), format="audio/mp3", autoplay=True)
-    except FileNotFoundError:
-        st.warning("🔊 System note: Put 'alarm.mp3' in your folder to activate the reminder alarm sound.")
-
-# 2. Switch to playing the sharp Buzzer sound if they make an incorrect guess
-if st.session_state.wrong_answer_trigger:
-    try:
-        buzzer_file = open("streamlit_chatbot/buzzer.mp3", "rb")
-        st.audio(buzzer_file.read(), format="audio/mp3", autoplay=True)
-    except FileNotFoundError:
-        st.warning("🔊 System note: Put 'buzzer.mp3' in your folder to activate the wrong-answer sound effect.")
+def play_wrong_sound():
+    st.markdown("""
+        <audio autoplay>
+        <source src="https://www.soundjay.com/buttons/sounds/button-10.mp3" type="audio/mp3">
+        </audio>
+    """, unsafe_allow_html=True)
