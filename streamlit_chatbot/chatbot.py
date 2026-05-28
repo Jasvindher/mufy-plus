@@ -195,22 +195,6 @@ else:
 import pandas as pd  # type: ignore
 import base64
 
-# Look for your topic selection block, it probably looks like this:
-if topics == "Algebra": # type: ignore
-    st.info("📘 Formula: (a+b)² = a² + 2ab + b²")
-    
-    # --- PUT THE CODE HERE ---
-    user_answer = st.text_input("Solve: 2x + 8 = 20")
-
-    if st.button("Check Answer"):
-        if user_answer.strip() == "6":
-            st.success("🎯 Correct! Great job! 🎉")
-            st.balloons()
-        elif user_answer.strip() == "":
-            st.warning("⚠️ Please type an answer before checking.")
-        else:
-            st.error("❌ Wrong answer! Try again.")
-
 # =========================================================================
 # PAGE CONFIG
 # =========================================================================
@@ -388,6 +372,14 @@ if subject == "Mathematics":
 
         answer = st.text_input("Solve: 2x + 8 = 20")
 
+        if st.button("Check Answer"):
+            if answer == "6":
+                st.success("✅ Correct!")
+                play_sound(CORRECT_SOUND) # type: ignore
+                st.balloons()
+            else:
+                st.error("❌ Wrong answer!")
+                play_sound(WRONG_SOUND) # type: ignore
 
 elif subject == "Science":
 
@@ -469,4 +461,22 @@ else:
 # FOOTER
 # =========================================================================
 st.markdown("---")
-st.markdown("<center>✨ Made with Streamlit | Study Hard, Dream Big ✨</center>", unsafe_allow_html=True)
+st.markdown(
+    "<center>✨ Made with Streamlit | Study Hard, Dream Big ✨</center>",
+    unsafe_allow_html=True
+)# =========================================================================
+# SOUND EFFECTS
+# =========================================================================
+def play_correct_sound():
+    st.markdown("""
+        <audio autoplay>
+        <source src="https://www.soundjay.com/buttons/sounds/button-3.mp3" type="audio/mp3">
+        </audio>
+    """, unsafe_allow_html=True)
+
+def play_wrong_sound():
+    st.markdown("""
+        <audio autoplay>
+        <source src="https://www.soundjay.com/buttons/sounds/button-10.mp3" type="audio/mp3">
+        </audio>
+    """, unsafe_allow_html=True)
