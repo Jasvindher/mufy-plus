@@ -372,14 +372,6 @@ if subject == "Mathematics":
 
         answer = st.text_input("Solve: 2x + 8 = 20")
 
-        if st.button("Check Answer"):
-            if answer == "6":
-                st.success("✅ Correct!")
-                play_sound(CORRECT_SOUND)
-                st.balloons()
-            else:
-                st.error("❌ Wrong answer!")
-                play_sound(WRONG_SOUND)
 
 elif subject == "Science":
 
@@ -461,6 +453,4 @@ else:
 # FOOTER
 # =========================================================================
 st.markdown("---")
-st.markdown(
-    "<center>✨ Made with Streamlit | Study Hard, Dream Big ✨</center>",
-    unsafe_allow_html=True
+st.markdown("<center>✨ Made with Streamlit | Study Hard, Dream Big ✨</center>", unsafe_allow_html=True)
