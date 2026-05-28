@@ -283,7 +283,7 @@ def play_wrong_sound():
         <source src="https://www.soundjay.com/buttons/sounds/button-10.mp3" type="audio/mp3">
         </audio>
     """, unsafe_allow_html=True)
-    
+
 # =========================================================================
 # TITLE
 # =========================================================================
@@ -388,11 +388,11 @@ if subject == "Mathematics":
         if st.button("Check Answer"):
             if answer == "6":
                 st.success("✅ Correct!")
-                play_sound(CORRECT_SOUND) # type: ignore
+                play_correct_sound()
                 st.balloons()
             else:
                 st.error("❌ Wrong answer!")
-                play_sound(WRONG_SOUND) # type: ignore
+                play_wrong_sound()
 
 elif subject == "Science":
 
