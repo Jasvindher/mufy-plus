@@ -270,7 +270,20 @@ h1, h2, h3 {
 
 </style>
 """, unsafe_allow_html=True)
+def play_correct_sound():
+    st.markdown("""
+        <audio autoplay style="display:none;">
+        <source src="https://www.soundjay.com/buttons/sounds/button-3.mp3" type="audio/mp3">
+        </audio>
+    """, unsafe_allow_html=True)
 
+def play_wrong_sound():
+    st.markdown("""
+        <audio autoplay style="display:none;">
+        <source src="https://www.soundjay.com/buttons/sounds/button-10.mp3" type="audio/mp3">
+        </audio>
+    """, unsafe_allow_html=True)
+    
 # =========================================================================
 # TITLE
 # =========================================================================
