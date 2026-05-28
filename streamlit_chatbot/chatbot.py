@@ -272,23 +272,6 @@ h1, h2, h3 {
 """, unsafe_allow_html=True)
 
 # =========================================================================
-# SOUND EFFECT FUNCTION
-# =========================================================================
-def autoplay_audio(file_path: str):
-    with open(file_path, "rb") as f:
-        data = f.read()
-
-    b64 = base64.b64encode(data).decode()
-
-    md = f"""
-    <audio autoplay="true">
-    <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
-    </audio>
-    """
-
-    st.markdown(md, unsafe_allow_html=True)
-
-# =========================================================================
 # TITLE
 # =========================================================================
 st.markdown('<h1 class="glow">🎓 STUDYVERSE</h1>', unsafe_allow_html=True)
@@ -362,15 +345,6 @@ with btn1:
 with btn2:
     if st.button("😴 Remind Me Later"):
         st.error("🚨 Procrastination Detected!")
-
-# =========================================================================
-# SOUND EFFECTS
-# =========================================================================
-CORRECT_SOUND = "https://www.soundjay.com/buttons/sounds/button-3.mp3"
-WRONG_SOUND = "https://www.soundjay.com/buttons/sounds/button-10.mp3"
-
-def play_sound(sound_url):
-    st.audio(sound_url, format="audio/mp3", autoplay=True)
 
 # =========================================================================
 # REVISION HUB
@@ -490,19 +464,3 @@ st.markdown("---")
 st.markdown(
     "<center>✨ Made with Streamlit | Study Hard, Dream Big ✨</center>",
     unsafe_allow_html=True
-)# =========================================================================
-# SOUND EFFECTS
-# =========================================================================
-def play_correct_sound():
-    st.markdown("""
-        <audio autoplay>
-        <source src="https://www.soundjay.com/buttons/sounds/button-3.mp3" type="audio/mp3">
-        </audio>
-    """, unsafe_allow_html=True)
-
-def play_wrong_sound():
-    st.markdown("""
-        <audio autoplay>
-        <source src="https://www.soundjay.com/buttons/sounds/button-10.mp3" type="audio/mp3">
-        </audio>
-    """, unsafe_allow_html=True)
